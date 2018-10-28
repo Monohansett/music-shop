@@ -1,9 +1,13 @@
-let express = require('express');
-let bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser')
+const mongoClient = require('mongodb').MongoClient;
+let objectID = require('mongodb').ObjectID;
 
 let app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+let db;
 
 let instruments = [
     {
@@ -21,48 +25,77 @@ let instruments = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('Hello API')
+    res.send('API for Mongodb Client')
 })
 
 app.get('/instruments', (req, res) => {
-    res.send(instruments)
+    db.collection('instruments').find().toArray((err, docs) => {
+        if (err) {
+            console.log(err)
+            return res.sendStatus(500)
+        }
+        res.send(docs)
+    })
 })
 
 app.get('/instruments/:id', (req, res) => {
-    let instrument = instruments.find((tool) => {
-        return tool.id = Number(req.params.id)
+    db.collection('instruments').findOne({ _id: objectID(req.params.id) }, (err, doc) => {
+        if (err) {
+            console.log(err)
+            return res.sendStatus(500)
+        } 
+        res.send(doc)
     })
-    res.send(instrument)
 })
 
 app.post('/instruments', (req, res) => {
     let instrument = {
-        id: Date.now(),
         name: req.body.name
     }
 
-    instruments.push(instrument)
+    db.collection('instruments').insertOne(instrument, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.sendStatus(500)
+        } 
+    })
     res.send(instrument)
 })
 
 app.put('/instruments/:id', (req, res) => {
-    let instrument = instruments.find(tool => {
-        return tool.id = Number(req.params.id)
-    })
-
-    instrument.name = req.body.name;
-    res.sendStatus(200)
+    db.collection('instruments').updateOne(
+        { _id: objectID(req.params.id) },
+        { name: req.body.name },
+        (err) => {
+            if (err) {
+                console.log(err)
+                return res.sendStatus(500)
+            } 
+            res.sendStatus(200)
+        }
+    )
 })
 
 app.delete('/instruments/:id', (req, res) => {
-    tools = instruments.filter( tool => {
-        return tool.id !== Number(req.params.id)
-    })
-
-
-    res.send(tools)
+    db.collection('instruments').deleteOne(
+        { _id: objectID(req.params.id) },
+        (err) => {
+            if (err) {
+                console.log(err)
+                return res.sendStatus(500)
+            } 
+            res.sendStatus(200)
+        }
+    )
 })
 
-app.listen(3012, () => {
-    console.log('Server is running')
+mongoClient.connect('mongodb://localhost:27017/musical-shop', { useNewUrlParser: true }, (err, database) => {
+    if (err) {
+        return console.log(err)
+    }
+    db = database.db('musicalShop')
+
+    app.listen(3012, () => {
+        console.log('Server is running')
+    })
 })
