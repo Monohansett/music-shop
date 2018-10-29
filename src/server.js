@@ -12,7 +12,7 @@ app.get('/', (res) => {
     res.send('API for Mongodb Client')
 })
 
-app.get('/instruments', (res) => {
+app.get('/instruments', (req, res) => {
     db.get().collection('instruments').find().toArray((err, docs) => {
         if (err) {
             console.log(err)

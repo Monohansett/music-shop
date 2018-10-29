@@ -10,12 +10,14 @@ exports.connect = (url, urlParser, done) => {
     }
 
     MongoClient.connect(url, urlParser, (err, db) => {
-        if (err) return done(err)
-        state.db = db;
+        if (err) {
+            return done(err)
+        }
+        state.db = db.db('musical-shop')
         done();
     })
 }
 
-exports.get = function() {
+exports.get = function () {
     return state.db;
 }
