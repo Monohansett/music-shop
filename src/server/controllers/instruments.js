@@ -21,7 +21,7 @@ exports.findById = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    let instrument = {
+    const instrument = {
         name: req.body.name
     };
     Instruments.create(instrument, (err, result) => {

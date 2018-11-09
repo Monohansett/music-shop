@@ -1,3 +1,115 @@
 body {
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* top-header styles */
+
+.top-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    max-width: 100%;
+    height: 30px;
+    padding: 0 20px 0 90px;
+    position: relative;
+    z-index: 1;
+    height: 30px;
+    background-color: #1d1d1d;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.top-header__elem {
+    margin: 0 10px;
+    white-space: nowrap;
+}
+
+.top-header__elem a{
+    color: #919191
+}
+
+.top-header__elem a:hover {
+    color: #919191
+}
+
+.top-header__on-right, .top-header__on-left, .top-header__on-center {
+    box-sizing: border-box;
+}
+
+i.fab {
+    font-size: 15px;
+}
+
+/* header styles */
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 30px 0 35px;
+    background-color: #232323;
+    transition: height 0.3s;
+}
+
+div > .logo {
+    color: #fff;
+    width: 130px;
+    height: 35px;
+}
+
+div > .logo:hover {
+    color: #b33535
+}
+
+ul.nav {
+    font-weight: bold;
+    display: flex;
+    font-size: 12px;
+    text-transform: uppercase
+}
+
+ul.nav > li.nav-item > a{
+    color:#fff;
+    line-height: 1;
+    text-decoration:none;
+    cursor: pointer;
+    position:relative;
+}
+
+ul.nav > li.nav-item > a::after {
+    background-color: #fff;
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0%;
+    left:20%;
+    position:absolute;
+    -webkit-transition: width .1s ease-in-out;
+    -moz--transition: width .1s ease-in-out;
+    transition: width .1s ease-in-out;
+    -webkit-transform:translateX(-50%);
+    -moz-transform:translateX(-50%);
+    transform:translateX(-20%);
+}
+
+ul.nav > li.nav-item > a:hover:after,
+ul.nav > li.nav-item > a:focus:after {
+    width: 100%;
+}
+
+/* media queries */
+
+@media only screen and (max-width:991px) {
+    div.socials {
+        display: none;
+    }
 }

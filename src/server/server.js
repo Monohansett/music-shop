@@ -2,7 +2,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     db = require('./db'),
     instrumentsController = require('./controllers/instruments');
-
+const dotenv = require('dotenv')
+dotenv.config()
 let app = express();
 
 app.use(bodyParser.json())

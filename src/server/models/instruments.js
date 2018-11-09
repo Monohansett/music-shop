@@ -1,6 +1,6 @@
 const db = require('../db'),
     objectID = require('mongodb').ObjectID;
-
+const util = require('util')
 
 exports.all = (cb) => {
     db.get().collection('instruments').find().toArray((err, docs) => {

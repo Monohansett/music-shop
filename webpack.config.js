@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -33,7 +34,7 @@ module.exports = {
         new HtmlWebpackPlugin({
           inject: false,
           hash: true,
-          template: './src/index.html',
+          template: './dist/index.html',
           filename: 'index.html'
         })
       ],
