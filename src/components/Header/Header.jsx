@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.toggleSearch = this.toggleSearch.bind(this)
+
+    }
+
+    state = {
+        toggleSearch: false
+    }
+
+    toggleSearch() {
+       this.setState({
+           toggleSearch: !this.state.toggleSearch
+       })
+    }
+
+
     render() {
         return (
             <React.Fragment>
-                <div className="container top-header">
+
+                <div className="top-header">
+                    {/* schedule block */}
                     <div className="top-header__on-right">
                         <span className="top-header__elem">
                             с 10:00 до 20:00 (без выходных)
@@ -13,6 +34,7 @@ class Header extends Component {
                             г.Минск, ул.Гамарника 20
                         </span>
                     </div>
+                    {/* fast contacts block */}
                     <div>
                         <span className="top-header__elem">
                             МТС: +375 (29) 502-92-62
@@ -21,6 +43,7 @@ class Header extends Component {
                             Life: +375 (29) 633-96-04
                         </span>
                     </div>
+                    {/* top-header socials block */}
                     <div className="socials">
                         <span className="top-header__elem">
                             <a target="_blank" href="https://vk.com/monohansett">
@@ -39,12 +62,14 @@ class Header extends Component {
                         </span>
                     </div>
                 </div>
-                <div className="container header">
+                {/* header block */}
+                <div className="header">
                     <div>
                         <a className="logo" href="/">
                             <i className="fas fa-music fa-3x"></i>
                         </a>
                     </div>
+                    {/* nav bar block */}
                     <ul className="nav">
                         <li className="nav-item">
                             <a className="nav-link" href="#">О нас</a>
@@ -62,6 +87,21 @@ class Header extends Component {
                             <a className="nav-link" href="#">Контакты</a>
                         </li>
                     </ul>
+                    <form action="wantToFind" className={this.state.toggleSearch ? 'header__search search__fade-in':'header__search search__fade-out'} placeholder="Поиск..." >
+                        <input type="text" className="fullwidth js-search" />
+                    </form>
+                    {/* header icons block */}
+                    <div className="header-icons">
+                        <span className="search__icon" onClick={this.toggleSearch}>
+                            <i className="fas fa-search"></i>
+                        </span>
+                        <span className="log-in__icon">
+                            <i className="fas fa-sign-in-alt"></i>
+                        </span>
+                        <span className="bucket__icon">
+                            <i className="fas fa-shopping-cart"></i>
+                        </span>
+                    </div>
                 </div>
             </React.Fragment >
         )

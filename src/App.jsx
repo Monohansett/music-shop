@@ -9,11 +9,10 @@ class App extends Component {
     constructor(props) {
         super(props)
 
-        this.loadData = this.loadData.bind(this)
+        // this.loadData = this.loadData.bind(this)
     }
 
     state = {
-        counter: 0,
         instruments: []
     }
 
@@ -27,18 +26,18 @@ class App extends Component {
             })
     }
 
-    loadData() {
-        axios.get(`http://localhost:3012/instruments`)
-            .then(res => {
-                const instruments = res.data;
-                this.setState({
-                    instruments: instruments
-                })
-            })
-    }
+    // loadData() {
+    //     axios.get(`http://localhost:3012/instruments`)
+    //         .then(res => {
+    //             const instruments = res.data;
+    //             this.setState({
+    //                 instruments: instruments
+    //             })
+    //         })
+    // }
 
     render() {
-        const a = this.state.instruments[0] || { name: "default" }
+        // const a = this.state.instruments[0] || { name: "default" }
 
         return (
             <Router>

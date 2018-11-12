@@ -55,7 +55,7 @@ i.fab {
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding: 0 30px 0 35px;
+    padding: 0 30px 0 90px;
     background-color: #232323;
     transition: height 0.3s;
 }
@@ -105,6 +105,50 @@ ul.nav > li.nav-item > a:hover:after,
 ul.nav > li.nav-item > a:focus:after {
     width: 100%;
 }
+
+.header-icons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.header-icons > .search__icon, .log-in__icon, .bucket__icon {
+    color: #b33535;
+    font-size: 22px;
+    line-height: 1;
+    padding: 5px;
+}
+
+.header-icons > .search__icon, .log-in__icon, .bucket__icon:hover {
+    cursor: pointer;
+    color: #b33535d4;
+}
+
+.header__search {
+    position: absolute;
+    left: 200px;
+    right: 200px;
+}
+
+.header__search .js-search {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.search__fade-in {
+    display: block;
+    transition: left 5s cubic-bezier(.5, -1, .5, 2) 
+}
+
+.search__fade-out {
+    display: none;
+    animation: ease-out 1ms;
+}
+
+
 
 /* media queries */
 
