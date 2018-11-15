@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux/src";
+
+import { fetchInstruments } from "../../reducers/fetchData/fetchDataActions";
 
 class Header extends Component {
 
@@ -17,6 +20,10 @@ class Header extends Component {
        this.setState({
            toggleSearch: !this.state.toggleSearch
        })
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchInstruments())
     }
 
 
@@ -103,9 +110,22 @@ class Header extends Component {
                         </span>
                     </div>
                 </div>
+                <div>
+                    <ul>
+                        {instruments.map( instrument, index => 
+                            <li key={index}>{instrument.name}</li>)}
+                    </ul>
+                </div>
             </React.Fragment >
         )
     }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    instruments: state.instruments,
+    // loading: state.products.loading,
+    // error: state.products.error
+  });
+  
+
+export default connect(mapStateToProps)(Header);;
