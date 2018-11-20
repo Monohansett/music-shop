@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux/src";
 
-import { fetchInstruments } from "../../reducers/fetchData/fetchDataActions";
+import { loadInstruments } from "../../reducers/fetchData/fetchDataActions";
 
 class Header extends Component {
 
@@ -17,13 +17,14 @@ class Header extends Component {
     }
 
     toggleSearch() {
-       this.setState({
-           toggleSearch: !this.state.toggleSearch
-       })
+        this.setState({
+            toggleSearch: !this.state.toggleSearch
+        })
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchInstruments())
+
+        this.props.dispatch(loadInstruments())
     }
 
 
@@ -94,8 +95,8 @@ class Header extends Component {
                             <a className="nav-link" href="#">Контакты</a>
                         </li>
                     </ul>
-                    <form action="wantToFind" className={this.state.toggleSearch ? 'header__search search__fade-in':'header__search search__fade-out'} placeholder="Поиск..." >
-                        <input type="text" className="fullwidth js-search" />
+                    <form action="wantToFind" className={this.state.toggleSearch ? 'header__search search__fade-in' : 'header__search search__fade-out'} >
+                        <input type="text" className="fullwidth js-search"  placeholder="Поиск..."/>
                     </form>
                     {/* header icons block */}
                     <div className="header-icons">
@@ -110,22 +111,23 @@ class Header extends Component {
                         </span>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <ul>
-                        {instruments.map( instrument, index => 
+                        {this.props.instruments.map( (instrument, index) =>
                             <li key={index}>{instrument.name}</li>)}
                     </ul>
-                </div>
+                </div> */}
             </React.Fragment >
         )
     }
 }
 
-const mapStateToProps = state => ({
-    instruments: state.instruments,
-    // loading: state.products.loading,
-    // error: state.products.error
-  });
-  
+const mapStateToProps = state => {
+    console.log(state)
+    return {
+        instruments: state.instruments
+    }
+};
+
 
 export default connect(mapStateToProps)(Header);;
