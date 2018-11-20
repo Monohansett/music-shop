@@ -111,12 +111,12 @@ class Header extends Component {
                         </span>
                     </div>
                 </div>
-                {/* <div>
+                <div>
                     <ul>
                         {this.props.instruments.map( (instrument, index) =>
                             <li key={index}>{instrument.name}</li>)}
                     </ul>
-                </div> */}
+                </div>
             </React.Fragment >
         )
     }
@@ -125,7 +125,7 @@ class Header extends Component {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        instruments: state.instruments
+        instruments: state.instrumentReducer.instruments
     }
 };
 
